@@ -13,6 +13,10 @@ class Donor(Base):
     __tablename__ = 'donors'
     __table_args__ = {'autoload': True}
 
+class Antigen(Base):
+    __tablename__ = 'antigens'
+    __table_args__ = {'autoload': True}
+
 
 def crf_cal(bg: str, ags: list, ver: int, com: bool=False) -> float:
     """
@@ -42,7 +46,7 @@ def crf_cal(bg: str, ags: list, ver: int, com: bool=False) -> float:
 api = FastAPI()
 
 
-@api.get("/")
+@api.get("/crf/")
 async def get_crf(
     bg: str = Query('', min_length=1, max_length=2, regex="^[ABO]$|^AB$"),
     ags: str = Query('', min_length=2, regex="^([ABCD][QRPW]?\d{1,3},?)+$"),
@@ -53,3 +57,10 @@ async def get_crf(
     else:
         crf = 0.0
     return {'crf': crf}
+
+
+@api.get("/antigens/")
+async def get_antigens():
+    with SessionLocal() as session:
+        antigens = session.query(Antigen).all()
+    return {'antigens': antigens}
