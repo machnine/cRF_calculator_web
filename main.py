@@ -93,6 +93,11 @@ async def post_crf_cal(request: Request):
 
     return round(crf, 2)
 
+
+@api.get("/crf_howto/")
+async def howto_crf(request: Request):
+    return request.items()
+
 # main API
 @api.get("/crf/")
 async def get_crf(
