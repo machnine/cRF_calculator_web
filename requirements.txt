@@ -1,6 +1,6 @@
-fastapi 
-uvicorn 
-sqlalchemy 
-aiofiles 
-jinja2 
-python-multipart 
+fastapi==0.78.0
+uvicorn==0.18.2
+SQLAlchemy==1.4.39
+aiofiles==0.8.0
+Jinja2==3.1.2
+python-multipart==0.0.5
